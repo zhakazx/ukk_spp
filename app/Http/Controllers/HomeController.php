@@ -47,15 +47,13 @@ class HomeController extends Controller
         $totalSiswaLunasXI = $this->getSppLunasByLevel('XI');
         $totalSiswaLunasXII = $this->getSppLunasByLevel('XII');
         // Total pembayaran per kelas
-        $totalPembayaranX = $totalSiswaX * $nominalSppX;
-        $totalPembayaranXI = $totalSiswaXI * $nominalSppXI;
-        $totalPembayaranXII = $totalSiswaXII * $nominalSppXII;
+        $totalPembayaranX = $totalSiswaLunasX * $nominalSppX;
+        $totalPembayaranXI = $totalSiswaLunasXI * $nominalSppXI;
+        $totalPembayaranXII = $totalSiswaLunasXII * $nominalSppXII;
         // Total tunggakan per kelas
-        $totalTunggakanX = ($totalSiswaX * $nominalSppX * 12) - $totalSiswaLunasX;
-        $totalTunggakanXI = (12 - $totalSiswaXI) * $nominalSppXI;
-        $totalTunggakanXII = (12 - $totalSiswaXII) * $nominalSppXII;
-
-        dd($totalSiswaX, $nominalSppX, $totalTunggakanX);
+        $totalTunggakanX = ($totalSiswaX * $nominalSppX * 12) - $totalPembayaranX;
+        $totalTunggakanXI = ($totalSiswaXI * $nominalSppXI * 12) - $totalPembayaranXI;
+        $totalTunggakanXII = ($totalSiswaXII * $nominalSppXII * 12) - $totalPembayaranXII;
 
         return view('page_admin.dashboard', [
             'siswaCount' => Siswa::count(),
