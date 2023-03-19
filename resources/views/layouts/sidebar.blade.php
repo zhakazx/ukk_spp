@@ -26,6 +26,7 @@
           </a>
         </li>
         @foreach (config('sidebar') as $sidebar)
+        @if ($sidebar['level'] == null or in_array(auth()->user()->level, $sidebar['level']))
           @if ($sidebar['_type'] == 'dropdown')
             <li class="nav-item">
               <div class="nav-link {{ request()->routeIs($sidebar['exactUrl'].'*') ? 'active' : ''  }}" 
@@ -59,8 +60,8 @@
               <span class="nav-link-text ms-1">{{ $sidebar['name'] }}</span>
             </a>
           </li>
-          @else
           @endif
+        @endif
         @endforeach
       </ul>
     </div>
