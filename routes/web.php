@@ -29,10 +29,12 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 Route::group(['middleware' => 'auth'], function() {
     Route::get('dashboard', [HomeController::class, 'dashboard'])->name('dashboard');
 
-    Route::resource('siswa', SiswaController::class);
-    Route::resource('kelas', KelasController::class, ['parameters' => ['kelas' => 'kelas']]);
-    Route::resource('spp', SppController::class);
-    Route::resource('petugas', PetugasController::class);
+    Route::group(['middleware' => 'admin'], function() {
+        Route::resource('siswa', SiswaController::class);
+        Route::resource('kelas', KelasController::class, ['parameters' => ['kelas' => 'kelas']]);
+        Route::resource('spp', SppController::class);
+        Route::resource('petugas', PetugasController::class);
+    });
     
     Route::get('pembayaran', [PembayaranController::class, 'index'])->name('pembayaran');
     Route::get('pembayaran/{siswa:nis}', [PembayaranController::class, 'transaksi'])->name('transaksi');
