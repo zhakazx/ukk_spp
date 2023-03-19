@@ -27,8 +27,9 @@
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                   <li>
-                    <form action="">
-                      <button class="dropdown-item">Logout</button>
+                    <form action="{{ route('logout') }}" method="POST">
+                      @csrf
+                      <button type="submit" class="dropdown-item">Logout</button>
                     </form>
                   </li>
                 </ul>
